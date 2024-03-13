@@ -27,7 +27,7 @@ export class LoadScreen extends Container {
 
         this.message = new Text(i18n.loadingMessage, {
             fill: 0x5c5c5c,
-            fontFamily: 'Verdana',
+            fontFamily: 'Helvetica',
             align: 'center',
         });
         this.message.anchor.set(0.5);

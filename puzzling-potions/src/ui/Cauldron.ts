@@ -131,7 +131,7 @@ class CauldronCircle extends Sprite {
         super();
         this.texture = Texture.from('circle');
         this.anchor.set(0.5);
-        this.tint = 0x2c136c;
+        this.tint = 0x6aa84f;
     }
 
     public async playSplashDrop(to: { x: number; y: number }, scale: number, duration: number) {

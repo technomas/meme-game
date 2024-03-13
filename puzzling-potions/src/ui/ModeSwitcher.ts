@@ -68,7 +68,7 @@ export class ModeSwitcher extends RadioGroup {
                                 .endFill(),
 
                             text: {
-                                fontFamily: 'Arial Rounded MT Bold',
+                                fontFamily: 'Helvetica',
                                 fontSize: 20,
                                 fill: 0xffffff,
                             },

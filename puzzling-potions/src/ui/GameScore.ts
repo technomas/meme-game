@@ -31,7 +31,7 @@ export class GameScore extends Container {
         this.addChild(this.container);
 
         this.cloud = new Cloud({
-            color: 0x2c136c,
+            color: 0x6aa84f,
             width: 200,
             height: 20,
             circleSize: 50,

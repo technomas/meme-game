@@ -1,7 +1,7 @@
 import { ICanvas, ITextStyle, Text, TextStyle } from 'pixi.js';
 
 const defaultLabelStyle: Partial<ITextStyle> = {
-    fontFamily: 'Arial Rounded MT Bold',
+    fontFamily: 'Helvetica',
     align: 'center',
 };
 

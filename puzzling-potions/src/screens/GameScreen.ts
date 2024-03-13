@@ -93,12 +93,12 @@ export class GameScreen extends Container {
         this.score = new GameScore();
         this.addChild(this.score);
 
-        this.comboMessage = new CloudLabel({ color: 0x2c136c, labelColor: 0xffffff });
+        this.comboMessage = new CloudLabel({ color: 0x6aa84f, labelColor: 0xffffff });
         this.comboMessage.text = i18n.comboMessage;
         this.comboMessage.hide(false);
         this.addChild(this.comboMessage);
 
-        this.comboLevel = new CloudLabel({ color: 0x2c136c, labelColor: 0xffffff });
+        this.comboLevel = new CloudLabel({ color: 0x6aa84f, labelColor: 0xffffff });
         this.comboLevel.text = 'x8';
         this.comboLevel.hide(false);
         this.addChild(this.comboLevel);

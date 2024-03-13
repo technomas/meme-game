@@ -6,10 +6,7 @@ import { i18n } from '../utils/i18n';
 import { LargeButton } from '../ui/LargeButton';
 import { registerCustomEase } from '../utils/animation';
 import { Logo } from '../ui/Logo';
-import { Dragon } from '../ui/Dragon';
 import { waitFor } from '../utils/asyncUtils';
-import { SmallButton } from '../ui/SmallButton';
-import { ImageButton } from '../ui/ImageButton';
 import { RippleButton } from '../ui/RippleButton';
 import { InfoPopup } from '../popups/InfoPopup';
 import { SettingsPopup } from '../popups/SettingsPopup';
@@ -26,14 +23,8 @@ export class HomeScreen extends Container {
     public static assetBundles = ['home', 'common'];
     /** The game logo */
     private logo: Logo;
-    /** Animated dragon */
-    private dragon: Dragon;
     /** Button that leads to gameplay */
     private playButton: LargeButton;
-    /** Button that links to the Github project */
-    private githubButton: SmallButton;
-    /** Button that links to the PixiJS page */
-    private pixiButton: ImageButton;
     /** Button that opens the info panel */
     private infoButton: RippleButton;
     /** Button that opens the settings panel */
@@ -47,12 +38,8 @@ export class HomeScreen extends Container {
         this.logo = new Logo();
         this.addChild(this.logo);
 
-        this.dragon = new Dragon();
-        this.dragon.playIdle();
-        this.addChild(this.dragon);
-
         this.base = new NineSlicePlane(Texture.from('rounded-rectangle'), 32, 32, 32, 32);
-        this.base.tint = 0x2c136c;
+        this.base.tint = 0x6aa84f;
         this.addChild(this.base);
 
         this.infoButton = new RippleButton({
@@ -69,14 +56,6 @@ export class HomeScreen extends Container {
         this.settingsButton.onPress.connect(() => navigation.presentPopup(SettingsPopup));
         this.addChild(this.settingsButton);
 
-        this.githubButton = new SmallButton({ text: i18n.githubButton });
-        this.githubButton.onPress.connect(() => window.open(i18n.urlGithub, 'blank'));
-        this.addChild(this.githubButton);
-
-        this.pixiButton = new ImageButton({ image: 'logo-pixi', scaleOverride: 0.75 });
-        this.pixiButton.onPress.connect(() => window.open(i18n.urlPixi, 'blank'));
-        this.addChild(this.pixiButton);
-
         this.playButton = new LargeButton({ text: i18n.playButton });
         this.playButton.onPress.connect(() => navigation.showScreen(GameScreen));
         this.addChild(this.playButton);
@@ -84,18 +63,12 @@ export class HomeScreen extends Container {
 
     /** Resize the screen, fired whenever window size changes  */
     public resize(width: number, height: number) {
-        this.dragon.x = width * 0.5;
-        this.dragon.y = height * 0.5;
         this.playButton.x = width * 0.5;
         this.playButton.y = height - 130;
         this.base.width = width;
         this.base.y = height - 140;
         this.logo.x = width * 0.5;
         this.logo.y = height * 0.2;
-        this.githubButton.x = width - 50;
-        this.githubButton.y = height - 40;
-        this.pixiButton.x = 50;
-        this.pixiButton.y = height - 40;
         this.infoButton.x = 30;
         this.infoButton.y = 30;
         this.settingsButton.x = width - 30;
@@ -108,11 +81,8 @@ export class HomeScreen extends Container {
 
         // Reset visual state, hide things that will show up later
         this.playButton.hide(false);
-        this.pixiButton.hide(false);
         this.infoButton.hide(false);
         this.settingsButton.hide(false);
-        this.githubButton.hide(false);
-        this.dragon.show(false);
         this.logo.show(false);
 
         // Play reveal animation
@@ -124,22 +94,17 @@ export class HomeScreen extends Container {
         this.interactiveChildren = true;
         // this.infoButton.show();
         await this.settingsButton.show();
-        this.pixiButton.show();
-        await this.githubButton.show();
     }
 
     /** Hide screen with animations */
     public async hide() {
         this.playButton.hide();
-        this.pixiButton.hide();
-        this.githubButton.hide();
         this.infoButton.hide();
         await waitFor(0.1);
         gsap.to(this.base.pivot, { y: -200, duration: 0.3, ease: 'back.in' });
         await waitFor(0.1);
         this.logo.hide();
         await waitFor(0.1);
-        await this.dragon.hide();
     }
 
     /** Animation for revealing the screen behind the purple sprite */

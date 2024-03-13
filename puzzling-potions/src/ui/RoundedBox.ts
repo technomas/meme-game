@@ -1,7 +1,7 @@
 import { Container, NineSlicePlane, Texture } from 'pixi.js';
 
 const defaultRoundedBoxOptions = {
-    color: 0x2c136c,
+    color: 0x6aa84f,
     width: 350,
     height: 600,
     shadow: true,

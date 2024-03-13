@@ -45,6 +45,8 @@ export class ResultScreen extends Container {
     private bottomBase: NineSlicePlane;
     /** Button that goes back to the game to play again */
     private continueButton: LargeButton;
+    /** Button that goes back to the game to play again */
+    private couponButton: LargeButton;
     /** Button that opens the settings panel */
     private settingsButton: RippleButton;
     /** A special transition that temporarely masks the entire screen */
@@ -85,7 +87,7 @@ export class ResultScreen extends Container {
         this.cauldron.y = 145;
         this.panel.addChild(this.cauldron);
 
-        this.message = new CloudLabel({ color: 0xffffff, labelColor: 0x2c136c });
+        this.message = new CloudLabel({ color: 0xffffff, labelColor: 0x6aa84f });
         this.message.y = -95;
         this.panel.addChild(this.message);
 
@@ -103,13 +105,17 @@ export class ResultScreen extends Container {
         this.panel.addChild(this.stars);
 
         this.bottomBase = new NineSlicePlane(Texture.from('rounded-rectangle'), 32, 32, 32, 32);
-        this.bottomBase.tint = 0x2c136c;
+        this.bottomBase.tint = 0x6aa84f;
         this.bottomBase.height = 200;
         this.addChild(this.bottomBase);
 
         this.continueButton = new LargeButton({ text: i18n.resultPlay });
         this.addChild(this.continueButton);
         this.continueButton.onPress.connect(() => navigation.showScreen(GameScreen));
+
+        this.couponButton = new LargeButton({ text: i18n.getCoupon });
+        this.addChild(this.couponButton);
+        this.couponButton.onPress.connect(() => window.open(i18n.urlPixi, 'blank'));
 
         this.maskTransition = new MaskTransition();
     }
@@ -118,6 +124,7 @@ export class ResultScreen extends Container {
     public prepare() {
         this.bottomBase.visible = false;
         this.continueButton.visible = false;
+        this.couponButton.visible = false;
         this.panel.visible = false;
         this.dragon.visible = false;
         this.score.visible = false;
@@ -139,6 +146,8 @@ export class ResultScreen extends Container {
         this.panel.y = height * 0.5;
         this.continueButton.x = width * 0.5;
         this.continueButton.y = height - 90;
+        this.couponButton.x = width * 0.5;
+        this.couponButton.y = height - 90;
         this.bottomBase.width = width;
         this.bottomBase.y = height - 100;
         this.settingsButton.x = width - 30;
@@ -232,10 +241,13 @@ export class ResultScreen extends Container {
     private async showBottom() {
         this.bottomBase.visible = true;
         this.continueButton.visible = true;
+        this.couponButton.visible = true;
         gsap.killTweensOf(this.bottomBase);
         this.bottomBase.pivot.y = -200;
         gsap.killTweensOf(this.continueButton.pivot);
+        gsap.killTweensOf(this.couponButton.pivot);
         this.continueButton.pivot.y = -200;
+        this.couponButton.pivot.y = -200;
 
         gsap.to(this.bottomBase.pivot, {
             y: 0,
@@ -246,6 +258,15 @@ export class ResultScreen extends Container {
 
         await gsap.to(this.continueButton.pivot, {
             y: 0,
+            x: -200,
+            duration: 0.4,
+            ease: 'back.out',
+            delay: 0.4,
+        });
+
+        await gsap.to(this.couponButton.pivot, {
+            y: 0,
+            x: 200,
             duration: 0.4,
             ease: 'back.out',
             delay: 0.4,
@@ -256,6 +277,7 @@ export class ResultScreen extends Container {
     private async hideBottom() {
         gsap.killTweensOf(this.bottomBase);
         gsap.killTweensOf(this.continueButton.pivot);
+        gsap.killTweensOf(this.couponButton.pivot);
 
         gsap.to(this.bottomBase.pivot, {
             y: -200,
@@ -265,6 +287,13 @@ export class ResultScreen extends Container {
 
         await gsap.to(this.continueButton.pivot, {
             y: -200,
+            duration: 0.4,
+            ease: 'back.in',
+        });
+
+        await gsap.to(this.couponButton.pivot, {
+            y: -200,
+            x: 400,
             duration: 0.4,
             ease: 'back.in',
         });

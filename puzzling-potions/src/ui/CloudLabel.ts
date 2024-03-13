@@ -4,7 +4,7 @@ import { Cloud } from './Cloud';
 import gsap from 'gsap';
 
 const defaultCloudLabelOptions = {
-    color: 0x2c136c,
+    color: 0x6aa84f,
     labelColor: 0xffffff,
 };
 

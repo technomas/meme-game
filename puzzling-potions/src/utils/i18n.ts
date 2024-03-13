@@ -1,8 +1,8 @@
 export const i18n = {
     loadingMessage: 'Game Brewing',
-    loadingDone: 'We’re Ready!',
+    loadingDone: 'Загрузка',
     pressMessage: 'Press to start',
-    playButton: 'Start Game',
+    playButton: 'Ебашь',
     resultTitle: 'Results',
     resultPlay: 'Play again',
     grade3: 'Incredible!',
@@ -15,7 +15,7 @@ export const i18n = {
     newBestScore: 'NEW BEST SCORE!',
     githubButton: 'Fork me\non Github!',
     urlGithub: 'https://github.com/pixijs/open-games',
-    urlPixi: 'https://pixijs.com/',
+    urlPixi: 'https://ya.ru',
     infoTitle: 'Info',
     infoDone: 'OK',
     settingsTitle: 'Settings',
@@ -34,4 +34,5 @@ export const i18n = {
     normalMode: 'Normal Mode',
     hardMode: 'Hard Mode',
     testMode: 'Test Mode',
+    getCoupon: 'Давай купон'
 };
