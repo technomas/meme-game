@@ -2,7 +2,7 @@ export const i18n = {
     loadingMessage: 'Game Brewing',
     loadingDone: 'Загрузка',
     pressMessage: 'Press to start',
-    playButton: 'Ебашь',
+    playButton: 'Стартуем',
     resultTitle: 'Results',
     resultPlay: 'Play again',
     grade3: 'Incredible!',

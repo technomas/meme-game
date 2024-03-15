@@ -16,6 +16,8 @@ import { userSettings } from '../utils/userSettings';
 import { waitFor } from '../utils/asyncUtils';
 import { MaskTransition } from '../ui/MaskTransition';
 import { userStats } from '../utils/userStats';
+import { app } from '../main';
+import { SmokeCloud } from '../ui/SmokeCloud';
 
 /** APpears after gameplay ends, displaying scores and grade */
 export class ResultScreen extends Container {
@@ -51,9 +53,14 @@ export class ResultScreen extends Container {
     private settingsButton: RippleButton;
     /** A special transition that temporarely masks the entire screen */
     private maskTransition?: MaskTransition;
+    /** The cloud animation at the top */
+    private cloud: SmokeCloud;
 
     constructor() {
         super();
+
+        this.cloud = new SmokeCloud();
+        this.addChild(this.cloud);
 
         this.settingsButton = new RippleButton({
             image: 'icon-settings',
@@ -115,7 +122,21 @@ export class ResultScreen extends Container {
 
         this.couponButton = new LargeButton({ text: i18n.getCoupon });
         this.addChild(this.couponButton);
-        this.couponButton.onPress.connect(() => window.open(i18n.urlPixi, 'blank'));
+        this.couponButton.onPress.connect(async () => {
+            await this.hidePanel();
+            this.couponButton.hide();
+            this.continueButton.hide();
+            await this.hideDragon();
+            // Make the cloud cover the entire screen in a flat colour
+            gsap.killTweensOf(this.cloud);
+            await gsap.to(this.cloud, {
+                height: app.renderer.height,
+                duration: 1,
+                ease: 'quad.in',
+                delay: 0.5,
+            });
+            window.parent.postMessage('showCoupons', "*")
+        });
 
         this.maskTransition = new MaskTransition();
     }
@@ -152,6 +173,8 @@ export class ResultScreen extends Container {
         this.bottomBase.y = height - 100;
         this.settingsButton.x = width - 30;
         this.settingsButton.y = 30;
+        this.cloud.y = 0;
+        this.cloud.width = width;
     }
 
     /** Show screen with animations */

@@ -32,7 +32,7 @@ const defaultConfig = {
     /** Validate all moves, regardless if they create a match or not */
     freeMoves: false,
     /** Gameplay duration, in seconds */
-    duration: 10,
+    duration: 60,
     /** Gameplay mode - affects the number of piece types in the grid */
     mode: <Match3Mode>'normal',
 };
